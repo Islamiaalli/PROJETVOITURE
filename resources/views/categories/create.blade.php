@@ -1,0 +1,41 @@
+@extends('layouts.master')
+@section('title')
+    Créer catégorie
+@endsection
+@section('content')
+  @session('success')
+  <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Catégorie enregistrée avec succès!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+  @endsession
+  <form action="{{ route('categories.store') }}" method="POST">
+    @csrf
+    <div class="mb-3">
+      <label for="Inputtype" class="form-label">Type</label>
+      <input type="string" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}">
+      @error('type')
+        <span class="alert alert-danger">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="mb-3">
+      <label for="InputPrice" class="form-label">Prix</label>
+      <input type="int" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}">
+      @error('price')
+        <span class="alert alert-danger">{{ $message }}</span>
+      @enderror
+    </div>
+    <div class="mb-3">
+        <label for="InputUsage" class="form-label">Usage</label>
+        <input type="string" class="form-control @error('usage') is_invalid @enderror" name="usage" value="{{ old('usage') }}">
+        @error('usage')
+        <span class="alert alert-danger">{{ $message }}</span>
+        @enderror
+      </div>
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form>
+@endsection
